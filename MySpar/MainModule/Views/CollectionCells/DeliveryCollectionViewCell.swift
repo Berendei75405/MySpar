@@ -26,6 +26,7 @@ final class DeliveryCollectionViewCell: UICollectionViewCell {
         
         contentView.layer.cornerRadius = 10
         contentView.clipsToBounds = true
+        contentView.backgroundColor = .white
         
         //MARK: - photoImageView constraints
         contentView.addSubview(photoImageView)
@@ -47,4 +48,3 @@ final class DeliveryCollectionViewCell: UICollectionViewCell {
     }
     
 }
-
