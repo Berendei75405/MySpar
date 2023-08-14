@@ -15,7 +15,7 @@ final class PointsCollectionViewCell: UICollectionViewCell {
         let img = UIImageView()
         img.translatesAutoresizingMaskIntoConstraints = false
         img.image = UIImage(named: "points")
-        img.contentMode = .scaleAspectFit
+        img.contentMode = .scaleToFill
         
         img.clipsToBounds = true
         
@@ -45,5 +45,3 @@ final class PointsCollectionViewCell: UICollectionViewCell {
     }
     
 }
-
-
