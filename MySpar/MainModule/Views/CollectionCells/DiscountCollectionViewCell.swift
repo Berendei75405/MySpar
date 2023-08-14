@@ -1,5 +1,5 @@
 //
-//  DiscountCollectionViewCell.swift
+//  DeliveryCollectionViewCell.swift
 //  MySpar
 //
 //  Created by Новгородцев Никита on 13.08.2023.
@@ -7,11 +7,12 @@
 
 import UIKit
 
-final class DiscountCollectionViewCell: UICollectionViewCell {
-    static let identifier = "DiscountCollectionViewCell"
+final class DeliveryCollectionViewCell: UICollectionViewCell {
+    static let identifier = "DeliveryCollectionViewCell"
     
-    //MARK: - discountImageView
-    private let discountImageView: UIImageView = {
+    
+    //MARK: - photoImageView
+    private let photoImageView: UIImageView = {
         let img = UIImageView()
         img.translatesAutoresizingMaskIntoConstraints = false
         img.contentMode = .scaleToFill
@@ -23,28 +24,27 @@ final class DiscountCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super .init(frame: frame)
         
-        contentView.layer.cornerRadius = 20
+        contentView.layer.cornerRadius = 10
         contentView.clipsToBounds = true
+        contentView.backgroundColor = .white
         
-        //MARK: - discountImageView
-        contentView.addSubview(discountImageView)
+        //MARK: - photoImageView constraints
+        contentView.addSubview(photoImageView)
         NSLayoutConstraint.activate([
-            discountImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            discountImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            discountImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            discountImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            photoImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            photoImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            photoImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            photoImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
         
     }
     
-    //MARK: - confugurate
-    func confugurate(photo: UIImage) {
-        self.discountImageView.image = photo
+    func configurate(photo: UIImage) {
+        self.photoImageView.image = photo
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
 }
