@@ -10,6 +10,15 @@ import UIKit
 final class RecommendedProductsCollectionCell: UICollectionViewCell {
     static let identifier = "RecommendedProductsCollectionCell"
     
+    //MARK: - container
+    private let container: UIView = {
+        let mainView = UIView()
+        mainView.translatesAutoresizingMaskIntoConstraints = false
+        mainView.layer.masksToBounds = false
+        
+        return mainView
+    }()
+    
     //MARK: - photoImageView
     private let photoImageView: UIImageView = {
         let img = UIImageView()
@@ -95,12 +104,28 @@ final class RecommendedProductsCollectionCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super .init(frame: frame)
         
-        contentView.layer.cornerRadius = 10
         contentView.backgroundColor = .white
-        contentView.clipsToBounds = true
+        contentView.layer.cornerRadius = 5
+        contentView.layer.shadowColor = UIColor.gray.cgColor
+        contentView.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
+        contentView.layer.shadowRadius = 1.0
+        contentView.layer.shadowOpacity = 1.0
+        
+        container.frame = contentView.frame
+        container.layer.cornerRadius = 10
+        container.clipsToBounds = true
+        
+        //MARK: - container constraints
+        contentView.addSubview(container)
+        NSLayoutConstraint.activate([
+            container.topAnchor.constraint(equalTo: contentView.topAnchor),
+            container.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            container.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            container.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+        ])
         
         //MARK: - photoImageView constraints
-        contentView.addSubview(photoImageView)
+        container.addSubview(photoImageView)
         NSLayoutConstraint.activate([
             photoImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             photoImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
@@ -118,7 +143,7 @@ final class RecommendedProductsCollectionCell: UICollectionViewCell {
         ])
         
         //MARK: - buyButton constraints
-        contentView.addSubview(buyButton)
+        container.addSubview(buyButton)
         NSLayoutConstraint.activate([
             buyButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -4),
             buyButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -4),
@@ -126,7 +151,7 @@ final class RecommendedProductsCollectionCell: UICollectionViewCell {
             buyButton.heightAnchor.constraint(equalToConstant: 33)
         ])
         
-        contentView.addSubview(discountLabel)
+        container.addSubview(discountLabel)
         NSLayoutConstraint.activate([
             discountLabel.bottomAnchor.constraint(equalTo: buyButton.topAnchor, constant: -6),
             discountLabel.leadingAnchor.constraint(equalTo: buyButton.leadingAnchor, constant: -2)
@@ -158,12 +183,12 @@ final class RecommendedProductsCollectionCell: UICollectionViewCell {
         
         //MARK: - priceLabel, countImageView constraints
         if discount != 0 {
-            contentView.addSubview(priceLabel)
-            contentView.addSubview(countImageView)
+            container.addSubview(priceLabel)
+            container.addSubview(countImageView)
             oldPriceLabel.isHidden = false
             discountLabel.isHidden = false
             //MARK: - oldPriceLabel constraints
-            contentView.addSubview(oldPriceLabel)
+            container.addSubview(oldPriceLabel)
             NSLayoutConstraint.activate([
                 oldPriceLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -4),
                 oldPriceLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 4)
@@ -181,8 +206,8 @@ final class RecommendedProductsCollectionCell: UICollectionViewCell {
             oldPriceLabel.attributedText = attributedString
             discountLabel.text = "\(discount)%"
         } else {
-            contentView.addSubview(priceLabel)
-            contentView.addSubview(countImageView)
+            container.addSubview(priceLabel)
+            container.addSubview(countImageView)
             oldPriceLabel.isHidden = true
             discountLabel.isHidden = true
             NSLayoutConstraint.activate([
@@ -203,5 +228,3 @@ final class RecommendedProductsCollectionCell: UICollectionViewCell {
     }
     
 }
-
-
